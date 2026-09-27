@@ -1,3 +1,11 @@
+---
+title: DepthWizard Elevation Intelligence
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_port: 7860
+---
+
 # DepthWizard: 3D Elevation Intelligence for Single-View Satellite Imagery
 
 An automated elevation reconstruction and interactive 3D terrain intelligence system built for ISRO Problem Statement 26175 (Smart India Hackathon 2026).

@@ -21,7 +21,12 @@ export interface PredictResponse {
   };
 }
 
-const API_BASE_URL = 'http://localhost:8000/api/v1';
+// In production (HF Spaces / any deployment) the backend serves on the same origin.
+// During local development, Vite runs on :8089 while the API runs on :8000.
+const isDev = typeof window !== 'undefined' && window.location.port === '8089';
+const API_BASE_URL: string =
+  import.meta.env.VITE_API_BASE_URL ??
+  (isDev ? 'http://localhost:8000/api/v1' : '/api/v1');
 
 export class DepthWizardAPI {
   /**
