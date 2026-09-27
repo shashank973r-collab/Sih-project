@@ -8,7 +8,7 @@ export const HeightProbeModal: React.FC = () => {
   if (!heightProbe) return null;
 
   return (
-    <div className="absolute top-20 right-6 z-20 w-72 rounded-2xl transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 border border-slate-200 dark:border-cyan-500/40 p-4 shadow-2xl backdrop-blur-md font-mono text-xs text-slate-700 dark:text-slate-300 select-none">
+    <div className="absolute top-16 sm:top-20 right-3 sm:right-6 z-20 w-72 max-w-[calc(100vw-1.5rem)] rounded-2xl transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 border border-slate-200 dark:border-cyan-500/40 p-3 sm:p-4 shadow-2xl backdrop-blur-md font-mono text-xs text-slate-700 dark:text-slate-300 select-none">
       <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-2 text-cyan-700 dark:text-cyan-400 font-bold">
           <MapPin className="w-4 h-4 text-cyan-600 dark:text-cyan-400 animate-bounce" />

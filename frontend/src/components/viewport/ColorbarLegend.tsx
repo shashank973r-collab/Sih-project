@@ -2,7 +2,13 @@ import React from 'react';
 import { useDepthWizardStore } from '../../store/useDepthWizardStore';
 
 export const ColorbarLegend: React.FC = () => {
-  const { sceneData, shaderMode, colormapPalette } = useDepthWizardStore();
+  const { 
+    sceneData, 
+    shaderMode, 
+    colormapPalette,
+    profileDrawerOpen,
+    cameraMode
+  } = useDepthWizardStore();
 
   if (!sceneData || (shaderMode !== 'colormap' && shaderMode !== 'uncertainty')) {
     return null;
@@ -23,8 +29,12 @@ export const ColorbarLegend: React.FC = () => {
     gradientStyle = 'linear-gradient(to right, #1f5a34, #388e3c, #c5b358, #8d6e63, #ffffff)';
   }
 
+  const bottomPositionClass = profileDrawerOpen 
+    ? 'bottom-60 sm:bottom-64' 
+    : (cameraMode === 'drone' ? 'bottom-24 sm:bottom-28' : 'bottom-4 sm:bottom-6');
+
   return (
-    <div className="absolute bottom-6 right-6 z-10 p-3 rounded-2xl transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-xl font-mono text-[10px] w-52 select-none">
+    <div className={`absolute ${bottomPositionClass} right-3 sm:right-6 z-10 p-2.5 sm:p-3 rounded-2xl transition-all duration-300 bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 shadow-xl font-mono text-[9px] sm:text-[10px] w-44 sm:w-52 select-none`}>
       <div className="flex justify-between font-bold text-slate-700 dark:text-slate-300 mb-1.5 uppercase tracking-wider">
         <span>{isUncertainty ? 'Uncertainty Map' : 'Elevation (DSM)'}</span>
         <span className="text-cyan-700 dark:text-cyan-400 font-bold">[{unit}]</span>

@@ -58,22 +58,33 @@ export const ElevationProfileDrawer: React.FC = () => {
   const areaPath = `${dsmPath} L ${points[points.length - 1].x.toFixed(1)} ${padY + chartH} L ${points[0].x.toFixed(1)} ${padY + chartH} Z`;
 
   return (
-    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 w-[92%] max-w-4xl rounded-2xl transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 border border-slate-200 dark:border-cyan-500/30 p-4 shadow-2xl backdrop-blur-md text-xs font-mono select-none">
+    <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 w-[95%] sm:w-[92%] max-w-4xl rounded-2xl transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 border border-slate-200 dark:border-cyan-500/30 p-3 sm:p-4 shadow-2xl backdrop-blur-md text-xs font-mono select-none">
       {/* Header */}
-      <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-2 text-cyan-700 dark:text-cyan-400 font-bold">
-          <TrendingUp className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
-          <span>ELEVATION PROFILE TRANSECT (CROSS-SECTION)</span>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 pb-2 mb-2 border-b border-slate-200 dark:border-slate-800">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-cyan-700 dark:text-cyan-400 font-bold text-[11px] sm:text-xs">
+            <TrendingUp className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+            <span className="truncate">ELEVATION PROFILE TRANSECT</span>
+          </div>
+          <button 
+            onClick={clearProfile}
+            className="sm:hidden p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+            title="Close Profile Transect"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-4 text-slate-600 dark:text-slate-400 text-[11px]">
-            <span>Total Dist: <strong className="text-slate-900 dark:text-white font-bold">{stats.totalDist.toFixed(1)} m</strong></span>
-            <span>Relief: <strong className="text-cyan-700 dark:text-cyan-400 font-bold">{stats.relief.toFixed(1)} {unit}</strong></span>
+
+        <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-slate-600 dark:text-slate-400 text-[10px] sm:text-[11px]">
+            <span>Dist: <strong className="text-slate-900 dark:text-white font-bold">{stats.totalDist.toFixed(1)}m</strong></span>
+            <span>Relief: <strong className="text-cyan-700 dark:text-cyan-400 font-bold">{stats.relief.toFixed(1)}{unit}</strong></span>
             <span>Avg Slope: <strong className="text-emerald-700 dark:text-emerald-400 font-bold">{stats.avgSlope.toFixed(1)}°</strong></span>
           </div>
           <button 
             onClick={clearProfile}
-            className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="hidden sm:block p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+            title="Close Profile Transect"
           >
             <X className="w-4 h-4" />
           </button>
@@ -81,8 +92,8 @@ export const ElevationProfileDrawer: React.FC = () => {
       </div>
 
       {/* SVG Elevation Chart */}
-      <div className="w-full overflow-hidden bg-slate-50 dark:bg-slate-950/70 rounded-xl border border-slate-200 dark:border-slate-800/80 p-2">
-        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-36">
+      <div className="w-full overflow-hidden bg-slate-50 dark:bg-slate-950/70 rounded-xl border border-slate-200 dark:border-slate-800/80 p-1.5 sm:p-2">
+        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-28 sm:h-36">
           <defs>
             <linearGradient id="profileGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.45" />

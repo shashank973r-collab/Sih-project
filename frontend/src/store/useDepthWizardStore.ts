@@ -150,7 +150,7 @@ export const useDepthWizardStore = create<DepthWizardState>((set, get) => ({
   gcps: initialGcps,
   validationReport: defaultReport,
 
-  leftPanelOpen: true,
+  leftPanelOpen: typeof window !== 'undefined' ? window.innerWidth >= 1024 : true,
   rightDrawerOpen: false,
   profileDrawerOpen: false,
   helpModalOpen: false,
@@ -170,7 +170,12 @@ export const useDepthWizardStore = create<DepthWizardState>((set, get) => ({
 
   setCalibrationLevel: (level) => set({ calibrationLevel: level }),
   setShaderMode: (mode) => set({ shaderMode: mode }),
-  setCameraMode: (mode) => set({ cameraMode: mode }),
+  // Profile picking is disabled in drone mode, so drop any open profile drawer
+  // when switching to it rather than leaving it stacked over the drone HUD.
+  setCameraMode: (mode) => set((state) => ({
+    cameraMode: mode,
+    profileDrawerOpen: mode === 'drone' ? false : state.profileDrawerOpen,
+  })),
   setVerticalExaggeration: (scale) => set({ verticalExaggeration: scale }),
   setSunAngles: (azimuth, elevation) => set({ sunAzimuthDeg: azimuth, sunElevationDeg: elevation }),
   setContourInterval: (interval) => set({ contourInterval: interval }),

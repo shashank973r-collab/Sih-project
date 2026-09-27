@@ -17,10 +17,10 @@ export const RightAnalytics: React.FC = () => {
 
   const [activeTab, setActiveTab] = useState<'metrics' | 'hierarchy' | 'gcps'>('metrics');
 
-  if (!rightDrawerOpen) return null;
-
   return (
-    <aside className="w-88 border-l transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md border-slate-200/80 dark:border-white/10 flex flex-col h-[calc(100vh-3.5rem)] z-20 overflow-y-auto select-none shadow-sm dark:shadow-none">
+    <aside className={`fixed lg:static top-14 right-0 bottom-0 z-40 w-[22rem] max-w-[90vw] border-l transition-transform duration-300 bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md border-slate-200/80 dark:border-white/10 flex flex-col h-[calc(100vh-3.5rem)] overflow-y-auto select-none shadow-2xl lg:shadow-none ${
+      rightDrawerOpen ? 'translate-x-0' : 'translate-x-full lg:hidden'
+    }`}>
       {/* Header */}
       <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div className="flex items-center gap-2">

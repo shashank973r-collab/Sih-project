@@ -15,7 +15,13 @@ import { useDepthWizardStore } from './store/useDepthWizardStore';
 export function App() {
   const meshRef = useRef<THREE.Mesh | null>(null);
   const [resetViewTrigger, setResetViewTrigger] = useState(0);
-  const { theme } = useDepthWizardStore();
+  const { 
+    theme, 
+    leftPanelOpen, 
+    setLeftPanelOpen, 
+    rightDrawerOpen, 
+    setRightDrawerOpen 
+  } = useDepthWizardStore();
 
   useEffect(() => {
     if (theme === 'dark') {
@@ -42,6 +48,18 @@ export function App() {
 
       {/* Main Workspace */}
       <div className="flex flex-1 relative overflow-hidden">
+        {/* Mobile/Tablet Backdrop Scrim for Drawers */}
+        {(leftPanelOpen || rightDrawerOpen) && (
+          <div 
+            onClick={() => {
+              setLeftPanelOpen(false);
+              setRightDrawerOpen(false);
+            }}
+            className="fixed inset-0 top-14 bg-slate-950/60 backdrop-blur-sm z-30 lg:hidden transition-opacity cursor-pointer"
+            aria-label="Close Drawer Overlay"
+          />
+        )}
+
         {/* Left Side: Control & Calibration Ingestion */}
         <LeftPanel meshRef={meshRef} />
 

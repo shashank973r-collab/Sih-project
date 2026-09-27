@@ -12,7 +12,8 @@ import {
   Eye,
   Activity,
   Waves,
-  AlertTriangle
+  AlertTriangle,
+  X
 } from 'lucide-react';
 import { useDepthWizardStore, ColormapPalette } from '../store/useDepthWizardStore';
 import { CalibrationLevel, ShaderMode } from '../types/elevation';
@@ -46,6 +47,7 @@ export const LeftPanel: React.FC<{ meshRef: React.MutableRefObject<any> }> = ({ 
     setFloodLevel,
     triggerMockInference,
     leftPanelOpen,
+    setLeftPanelOpen,
     gcps
   } = useDepthWizardStore();
 
@@ -95,12 +97,28 @@ export const LeftPanel: React.FC<{ meshRef: React.MutableRefObject<any> }> = ({ 
     alert("Exporting calibrated 32-bit Float DSM GeoTIFF with EPSG:32644 header (simulated download).");
   };
 
-  if (!leftPanelOpen) return null;
-
   return (
-    <aside className="w-80 border-r transition-colors duration-300 bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md border-slate-200/80 dark:border-white/10 flex flex-col h-[calc(100vh-3.5rem)] z-20 overflow-y-auto select-none shadow-sm dark:shadow-none">
-      <div className="p-4 space-y-6">
-        
+    <aside className={`fixed lg:static top-14 left-0 bottom-0 z-40 w-80 max-w-[85vw] border-r transition-transform duration-300 bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md border-slate-200/80 dark:border-white/10 flex flex-col h-[calc(100vh-3.5rem)] overflow-y-auto select-none shadow-2xl lg:shadow-none ${
+      leftPanelOpen ? 'translate-x-0' : '-translate-x-full lg:hidden'
+    }`}>
+      <div className="p-4 pt-3 space-y-6">
+        {/* Mobile Header with Close Button */}
+        <div className="flex lg:hidden items-center justify-between pb-2 mb-1 border-b border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-2">
+            <Sliders className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-800 dark:text-slate-200 font-mono">
+              Mission Control
+            </span>
+          </div>
+          <button 
+            onClick={() => setLeftPanelOpen(false)}
+            className="p-1 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+            title="Close Panel"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
         {/* Upload Zone */}
         <div>
           <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-2 font-mono">
@@ -389,11 +407,11 @@ export const LeftPanel: React.FC<{ meshRef: React.MutableRefObject<any> }> = ({ 
           </div>
         </div>
 
-        {/* 4. Disaster Intelligence & Scenario Simulation */}
+        {/* 5. Disaster Intelligence & Scenario Simulation */}
         <div className="space-y-3 pt-2 border-t border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between">
             <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block font-mono">
-              4. Disaster Simulation
+              5. Disaster Simulation
             </label>
             <span className="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-400 font-bold">
               Rapid Response
@@ -460,10 +478,10 @@ export const LeftPanel: React.FC<{ meshRef: React.MutableRefObject<any> }> = ({ 
           )}
         </div>
 
-        {/* Export Center */}
+        {/* 6. Defense Assets & Export */}
         <div className="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-800">
           <label className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block font-mono">
-            5. Defense Assets & Export
+            6. Defense Assets & Export
           </label>
           <div className="grid grid-cols-2 gap-2">
             <button
