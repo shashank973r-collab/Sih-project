@@ -1,0 +1,107 @@
+# ==============================================================================
+# DepthWizard — Deployment & Git Exclusion List
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Environment & Secrets
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.cert
+*.pfx
+
+# ------------------------------------------------------------------------------
+# 2. Python Bytecode, Caches & Virtual Environments
+# ------------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+
+# ------------------------------------------------------------------------------
+# 3. Node.js / Frontend Build & Caches
+# ------------------------------------------------------------------------------
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.parcel-cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.eslintcache
+
+# ------------------------------------------------------------------------------
+# 4. Large Model Checkpoints & Pretrained Weights
+# ------------------------------------------------------------------------------
+# Downloaded foundation model weights (Depth Anything V2, etc.) should not be in git
+*.pt
+*.pth
+*.bin
+*.onnx
+*.safetensors
+*.ckpt
+*.h5
+weights/
+checkpoints/
+models/*.pt
+models/*.pth
+models/*.bin
+models/*.onnx
+
+# ------------------------------------------------------------------------------
+# 5. Generated Runtime Outputs & Temporary Files
+# ------------------------------------------------------------------------------
+# DSM GeoTIFFs & 3D GLB meshes generated dynamically during job execution
+backend/outputs/*
+!backend/outputs/.gitkeep
+outputs/*
+!outputs/.gitkeep
+temp/
+tmp/
+*.tmp
+*.temp
+*.log
+
+# ------------------------------------------------------------------------------
+# 6. Operating System & IDE Files
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+ehthumbs.db
+.idea/
+.vscode/
+*.swp
+*~
