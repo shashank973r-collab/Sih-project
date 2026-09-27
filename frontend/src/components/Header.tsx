@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Globe2, 
-  Layers, 
+import {
+  Layers,
   Navigation, 
   Activity, 
   BarChart3, 
@@ -17,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useDepthWizardStore } from '../store/useDepthWizardStore';
 import { PresetAOI } from '../utils/terrainGenerator';
+import logoUrl from '../logo.svg';
 
 export const Header: React.FC = () => {
   const { 
@@ -77,9 +77,7 @@ export const Header: React.FC = () => {
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-600 via-sky-600 to-blue-700 flex items-center justify-center shadow-md shadow-cyan-500/20 ring-1 ring-white/20 shrink-0">
-            <Globe2 className="w-4 h-4 text-white" />
-          </div>
+          <img src={logoUrl} alt="DepthWizard logo" className="w-8 h-8 rounded-xl shrink-0 object-contain" />
           <div>
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="font-extrabold tracking-tight text-xs sm:text-sm text-slate-900 dark:text-white">
